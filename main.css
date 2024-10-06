@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'GabiaGosran-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2409-2@1.0/GabiaGosran-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'GabiaGosran-Regular';
+}
+
+div {
+    box-sizing: border-box;
+}
+
+.list-group {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.black-bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    padding: 30px;
+    display: none;
+}
+
+.white-bg {
+    background: white;
+    border-radius: 5px;
+    padding: 30px;
+}
+
+.btn-design {
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px;
+    width: 100px;
+}
