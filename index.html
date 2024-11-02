@@ -55,9 +55,28 @@
         <input type="text" id="answer">
         <button id="send-answer">제출</button>
     </div>
-    <div class="alert alert-danger">
-        <span id="num">5</span>초 이내 구매시 사은품 증정
+
+    <div class="slide-container">
+        <div class="slide-box">
+            <img src="source/img/car1.png">
+        </div>
+        <div class="slide-box">
+            <img src="source/img/car2.png">
+        </div>
+        <div class="slide-box">
+            <img src="source/img/car3.png">
+        </div>
     </div>
+
+    <button class="slide-1 btn-design">1</button>
+    <button class="slide-2 btn-design">2</button>
+    <button class="slide-3 btn-design">3</button>
+    <button class="slide-N btn-design">NEXT</button>
+
+    <div style="clear: both;"></div>
+    <!-- <div class="alert alert-danger">
+        <span id="num">5</span>초 이내 구매시 사은품 증정
+    </div> -->
     <script>
         // document.querySelector(.class) document.querySelectorAll(.class)[0]도 가능 <- 이게 편할 듯 
         document.getElementsByClassName('navbar-toggler')[0].addEventListener('click', function () { document.getElementsByClassName('list-group')[0].classList.toggle('show'); })
@@ -67,8 +86,14 @@
 
         // 모달 input 공백 확인
         $('form').on('submit', function (e) {
+            var 입력한값 = document.getElementById('email').value;
             if (document.getElementById('email').value == '' && document.getElementById('password').value == '') { alert('공백을 채우셈'); e.preventDefault(); }
             else if (document.getElementById('password').value.length < 6) { alert('Password 6자 미만'); e.preventDefault(); }
+            else if (!(/\S+@\S+\.\S+/.test(입력한값))) {
+                alert('이메일형식아님')
+                e.preventDefault();
+            }
+            // /\S+@\S+\.\S+/ -> 이메일 형식 확인
         });
         // e.preventDefault(); -> 폼 전송을 막음
         // form 전송할때 submit이라는 이벤트가 발생
@@ -134,7 +159,46 @@
             if (count >= 0) {
                 document.querySelector('#num').innerHTML = count;
             }
+            else if (count < 0) {
+                document.querySelector('.alert-danger').style.display = 'none';
+                //style.display 조정 가능
+            }
         }, 1000);
+
+        // /[a-zA-Z]/.test('반가워요')  //false _> /WORD/정규식
+        // /[a-zA-Z]/.test('반가워요a') //true
+        // / [ㄱ - ㅎ가 - 힣ㅏ - ㅣ] /.test('반가워요')  //true
+        // /\S/.test('abcde')   //true
+        // /\S+@\S+\.\S+/ -> 이메일 형식 확인
+        var slide_check = 1;
+        $('.slide-1').on('click', function () {
+            $('.slide-container').css('transform', 'translateX(0vw)');
+            slide_check = 1;
+        })
+        $('.slide-2').on('click', function () {
+            $('.slide-container').css('transform', 'translateX(-50vw)');
+            slide_check = 2;
+        })
+        $('.slide-3').on('click', function () {
+            $('.slide-container').css('transform', 'translateX(-100vw)');
+            slide_check = 3;
+        })
+
+        $('.slide-N').on('click', function () {
+            if (slide_check == 1) {
+                $('.slide-container').css('transform', 'translateX(-50vw)');
+                slide_check = 2;
+            }
+            else if (slide_check == 2) {
+                $('.slide-container').css('transform', 'translateX(-100vw)');
+                slide_check = 3;
+            }
+            else if (slide_check == 3) {
+                $('.slide-container').css('transform', 'translateX(0vw)');
+                slide_check = 1;
+            }
+// $('.slide-container').css('transform', 'translateX(-' + 지금사진 + '00vw)');
+        })
 
 
     </script>
